@@ -4,12 +4,6 @@ import PropTypes from "prop-types";
 export default function TextForm(props) {
   const [text, setText] = useState("");
   
-  const [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-
-  const [mybtnText, setBtnText] = useState("Enable Dark Mode");
 
   const handleUpperCaseClick = () => {
     let newText = text.toUpperCase();
@@ -63,25 +57,11 @@ export default function TextForm(props) {
     setText(newText.join(" "));
   };
 
-  const toggleStyle = () => {
-    if (myStyle.color === "black") {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setBtnText("Enable Light Mode");
-    } else {
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-      setBtnText("Enable Dark Mode");
-    }
-  };
+  
 
   return (
     <>
-      <div className="container" style={myStyle}>
+      <div className="container"  style={{color : props.mode === 'dark' ? 'white' : 'black'}}>
         <div className="container">
           <h1>{props.heading}</h1>
           <div className="mb-3">
@@ -91,6 +71,7 @@ export default function TextForm(props) {
               id="myBox"
               rows="8"
               onChange={handleOnChange}
+              style={{backgroundColor : props.mode === 'dark' ? 'grey' : 'white',color: props.mode ==='dark' ? 'white' : 'black'}}
             ></textarea>
           </div>
 
@@ -136,21 +117,7 @@ export default function TextForm(props) {
           <p>{0.008 * text.split(" ").length} minutes to read</p>
 
           <h2>Preview</h2>
-          <p>{text}</p>
-        </div>
-        <div className="container my-10">
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="switchCheckDefault"
-              onClick={toggleStyle}
-            />
-            <label className="form-check-label" htmlFor="switchCheckDefault">
-              {mybtnText}
-            </label>
-          </div>
+          <p>{text.length>0 ? text : "Enter something above in textbox to preview here...."}</p>
         </div>
       </div>
     </>
