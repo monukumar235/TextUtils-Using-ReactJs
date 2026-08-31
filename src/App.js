@@ -10,6 +10,7 @@ function App() {
 
   const [alert, setAlert] = useState(null);
 
+
   const showAlert = (message,type)=>{
     setAlert({
       msg : message,
@@ -24,7 +25,7 @@ function App() {
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
-      document.body.style.backgroundColor = "grey";
+      document.body.style.backgroundColor = "#343a40";
       showAlert("Dark mode has been enabled","success");
     } else {
       setMode("light");
