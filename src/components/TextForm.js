@@ -62,16 +62,16 @@ export default function TextForm(props) {
     props.showAlert("Removed the extra space from the text!", "success");
   };
 
-  const countWords = ()=>{
+  const countWords = () => {
     let wordArr = text.split(" ");
-    let count =0;
-    for(let i=0;i<wordArr.length;i++){
-      if(wordArr[i]!==""){
+    let count = 0;
+    for (let i = 0; i < wordArr.length; i++) {
+      if (wordArr[i] !== "") {
         count++;
       }
     }
     return count;
-  }
+  };
   return (
     <>
       <div
@@ -79,7 +79,7 @@ export default function TextForm(props) {
         style={{ color: props.mode === "dark" ? "white" : "#343a40" }}
       >
         <div className="container">
-          <h1>{props.heading}</h1>
+          <h2 className="mb-4">{props.heading}</h2>
           <div className="mb-3">
             <textarea
               className="form-control"
@@ -89,47 +89,86 @@ export default function TextForm(props) {
               onChange={handleOnChange}
               style={{
                 backgroundColor: props.mode === "dark" ? "#343a40" : "white",
-                color: props.mode === "dark" ? "white" : "grey"
+                color: props.mode === "dark" ? "white" : "grey",
               }}
-            >
-            </textarea>
+            ></textarea>
           </div>
 
           <button
-            className="btn mx-1"
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
             onClick={handleUpperCaseClick}
-            style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
           >
             Convert to Uppercase
           </button>
           <button
-            className="btn mx-1"
-            style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
             onClick={handleLowerCaseClick}
           >
             Convert to Lowercase
           </button>
-          <button className="btn mx-1" style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}} onClick={handleClearClick}>
+          <button
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
+            onClick={handleClearClick}
+          >
             Clear Text
           </button>
           <button
-            className="btn mx-1"
-            style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
             onClick={handleCapitalizedClick}
           >
             Capitalized Text
           </button>
           <button
-            className="btn mx-1"
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
             onClick={handleInvertCaseClick}
-            style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
           >
             Invert Case Text
           </button>
-          <button className="btn mx-1" onClick={copyText} style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}>
+          <button
+            disabled={text.length === 0}
+            className="btn mx-1 my-1"
+            onClick={copyText}
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
+          >
             Copy Text
           </button>
-          <button className="btn  mx-1" onClick={reomveExtraSpaces} style={{backgroundColor: props.mode === 'dark' ? 'white' : '#343a40',color :props.mode === 'dark'?'black':'white'}}>
+          <button
+            disabled={text.length === 0}
+            className="btn  mx-1 my-1"
+            onClick={reomveExtraSpaces}
+            style={{
+              backgroundColor: props.mode === "dark" ? "white" : "#343a40",
+              color: props.mode === "dark" ? "black" : "white",
+            }}
+          >
             Remove Extra Spaces
           </button>
         </div>
@@ -138,13 +177,19 @@ export default function TextForm(props) {
           <p>
             {countWords()} word and {text.length} characters
           </p>
-          <p>{0.008 * text.split(" ").length} minutes to read</p>
+          <p>
+            {0.008 *
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length}{" "}
+            minutes to read
+          </p>
 
           <h2>Preview</h2>
           <p>
             {text.length > 0
               ? text
-              : "Enter something above in textbox to preview here...."}
+              : "Nothing to preview!"}
           </p>
         </div>
       </div>
