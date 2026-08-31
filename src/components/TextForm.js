@@ -8,53 +8,59 @@ export default function TextForm(props) {
   const handleUpperCaseClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to UpperCase!","success");
   };
-
+  
   const handleLowerCaseClick = () => {
     let newtext = text.toLowerCase();
     setText(newtext);
+    props.showAlert("Converted to LowerCase!","success");
   };
-
+  
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
-
+  
   const handleClearClick = () => {
     let newtext = "";
     setText(newtext);
+    props.showAlert("Cleared!","success");
   };
-
+  
   const handleCapitalizedClick = () => {
     let words = text.split(" ");
-
+    
     for (let i = 0; i < words.length; i++) {
       words[i] =
-        words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+      words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
     }
     setText(words.join(" "));
+    props.showAlert("Converted to Capitalized Case!","success");
   };
-
+  
   const handleInvertCaseClick = () => {
     let words = text.split(" ");
-
+    
     for (let i = 0; i < words.length; i++) {
       words[i] =
-        words[i].charAt(0).toLowerCase() + words[i].slice(1).toUpperCase();
+      words[i].charAt(0).toLowerCase() + words[i].slice(1).toUpperCase();
     }
     setText(words.join(" "));
+    props.showAlert("Converted to Inverse Capitalized Case!","success");
   };
-
+  
   const copyText = () => {
     let text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
-    alert("Text copied to clipboard");
     handleClearClick();
+    props.showAlert("Text has been copied to clipboard!","success");
   };
-
+  
   const reomveExtraSpaces = () => {
     let newText = text.split(/[  ]+/);
     setText(newText.join(" "));
+    props.showAlert("Removed the extra space from the text!","success");
   };
 
   
