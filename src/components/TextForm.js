@@ -49,9 +49,7 @@ export default function TextForm(props) {
   };
 
   const copyText = () => {
-    let text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    navigator.clipboard.writeText(text);
     handleClearClick();
     props.showAlert("Text has been copied to clipboard!", "success");
   };
@@ -63,7 +61,7 @@ export default function TextForm(props) {
   };
 
   const countWords = () => {
-    let wordArr = text.split(" ");
+    let wordArr = text.split(/\s/);
     let count = 0;
     for (let i = 0; i < wordArr.length; i++) {
       if (wordArr[i] !== "") {
